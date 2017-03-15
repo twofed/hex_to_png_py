@@ -26,9 +26,14 @@ class hex_to_png():
             ARRAY_HEX[ITER_CNT-1]=(hexdata[dr:] + bytes(asa, 'utf-8'))
         LENS=str(len(ARRAY_HEX))
         if len(LENS)<7:
+            LENS = hex(int(LENS))
+            LENS=LENS[2:len(LENS)]
             zero=6-len(LENS)
-            LENS=LENS+'F'*zero
-        ARRAY_HEX.insert(0,bytes(LENS,'utf-8'))
+            LENS='0'*zero + LENS
+            ARRAY_HEX.insert(0, bytes(LENS, 'utf-8'))
+        else:
+            LENS=hex(int(LENS))
+            ARRAY_HEX.insert(0,bytes(LENS[2:8],'utf-8'))
         while len(ARRAY_HEX)>ITER_CNT2:
             ARRAY_RGB.append(tuple(int(ARRAY_HEX[ITER_CNT2][i:i+2], 16) for i in (0, 2 ,4)))
             ITER_CNT2 += 1
@@ -44,6 +49,7 @@ class hex_to_png():
         img = smp.toimage( data )
         #img.show()
         img.save(filename+'.png')
+
 
 class png_to_hex():
     def main(filename):
@@ -63,11 +69,11 @@ class png_to_hex():
             HEX_ARRAY.append(bytes(('%02x%02x%02x' % pix[WIDTH,HIGHT]), 'utf-8'))
             WIDTH+=1
             INTER_CNT+=1
-        chsum=HEX_ARRAY[0].decode("utf-8")
+        chsum=(HEX_ARRAY[0]).decode("utf-8")
+        chsum=str(int(chsum.upper(),16))
         INTER_CNT=0
         while len(chsum)>INTER_CNT:
-            if chsum[INTER_CNT]!='f' and INTER_CNT!=6:
-                outsum=outsum+chsum[INTER_CNT]
+            outsum=outsum+chsum[INTER_CNT]
             INTER_CNT += 1
         HEX_ARRAY.pop(0)
         while len(HEX_ARRAY)!=int(outsum):
@@ -79,5 +85,5 @@ class png_to_hex():
                 fout.write(binascii.unhexlify(HEX_ARRAY[ITER_CNT2]))
                 ITER_CNT2 += 1
 
-hex_to_png.main('test1.7z')
-png_to_hex.main('test1.7z.png')
+hex_to_png.main('tau.tgz')
+png_to_hex.main('tau.tgz.png')
