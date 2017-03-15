@@ -29,7 +29,6 @@ class hex_to_png():
             zero=6-len(LENS)
             LENS=LENS+'F'*zero
         ARRAY_HEX.insert(0,bytes(LENS,'utf-8'))
-        #ARRAY_HEX.insert(1,bytes('010101','utf-8'))
         while len(ARRAY_HEX)>ITER_CNT2:
             ARRAY_RGB.append(tuple(int(ARRAY_HEX[ITER_CNT2][i:i+2], 16) for i in (0, 2 ,4)))
             ITER_CNT2 += 1
