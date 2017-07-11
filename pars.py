@@ -80,11 +80,10 @@ class png_to_hex():
             x=len(HEX_ARRAY)-1
             HEX_ARRAY.pop(x)
         #HEX_ARRAY.pop(HEX_ARRAY.index(search))
-            #HEX_ARRAY.pop(HEX_ARRAY.index(search))
         with open((filename[:-8]+'_hexed'+filename[-8:-4]), 'wb') as fout:
             while len(HEX_ARRAY)>ITER_CNT2:
                 if (len(HEX_ARRAY)-ITER_CNT2)==1:
-                    INTER_CNT=0
+                    INTER_CNT=2 # def 0 
                     while str(HEX_ARRAY[ITER_CNT2].decode("utf-8")).rfind('00',0,len((HEX_ARRAY[ITER_CNT2]).decode("utf-8")))!=-1:
                         HEX_ARRAY[ITER_CNT2] = HEX_ARRAY[ITER_CNT2][0:6 - INTER_CNT]
                         INTER_CNT+=2
