@@ -85,7 +85,7 @@ class png_to_hex():
                 if (len(HEX_ARRAY)-ITER_CNT2)==1:
                     INTER_CNT=2 # def 0 
                     while str(HEX_ARRAY[ITER_CNT2].decode("utf-8")).rfind('00',0,len((HEX_ARRAY[ITER_CNT2]).decode("utf-8")))!=-1:
-                        if str(HEX_ARRAY[ITER_CNT2].decode(codir))=='000000':
+                        if str(HEX_ARRAY[ITER_CNT2].decode("utf-8"))=='000000':
                             break
                         HEX_ARRAY[ITER_CNT2] = HEX_ARRAY[ITER_CNT2][0:6 - INTER_CNT]
                         INTER_CNT+=2
